@@ -41,6 +41,17 @@ Faculty
 Library
 Student
 
+> db.Student.insert({"Name" : "Nikhil c","Age" : 21,"_id" : "1BM17Cs052","Location" : "Srinagar","phone" : "8088631797","Email" :"nikhilc.cs17@bmsce.ac.in"})
+WriteResult({ "nInserted" : 1 })
+> db.Student.find()
+{ "_id" : "1BM17Cs052", "Name" : "Nikhil c", "Age" : 21, "Location" : "Srinagar", "phone" : "8088631797", "Email" : "nikhilc.cs17@bmsce.ac.in" }
+> db.Student.insert({"Name" : "Bharath","Age" : 21,"_id" : "1BM17Cs017","Location" : "Gubbi","phone" : "8088631","Email" :"Bharath.cs17@bmsce.ac.in"})
+WriteResult({ "nInserted" : 1 })
+> db.Student.insert({"Name" : "Hetav","Age" : 20,"_id" : "1BM17Cs059","Location" : "Gujarat","phone" : "8088","Email" :"Hetav.cs17@bmsce.ac.in"})
+WriteResult({ "nInserted" : 1 })
+> db.Student.insert({"Name" : "Abhi","Age" : 20,"_id" : "1BM17Cs010","Location" : "KRpuram","phone" : "808866455","Email" :"Abhi.cs17@bmsce.ac.in"})
+WriteResult({ "nInserted" : 1 })
+
 
 > db.Faculty.insert([{
 ... "userId":"rirani",
