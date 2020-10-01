@@ -1,0 +1,531 @@
+> use company2
+switched to db company2
+
+> db.Department.insertOne({
+... "_id" : "EC01",
+... "name" : "ECE",
+... "HOD" : "Naveen",
+... "number" : "946464646",
+... "mail" : "ece@bmsce.ac.in"
+... })
+{ "acknowledged" : true, "insertedId" : "EC01" }
+
+
+> db.Department.find()
+{ "_id" : "EC01", "name" : "ECE", "HOD" : "Naveen", "number" : "946464646", "mail" : "ece@bmsce.ac.in" }
+> db.Department.insert({
+... "_id": "CS01",
+... "name": "CSE",
+... "HOD" : "Umadevi",
+... "number" : "863497638",
+... "mail" : "cse@bmsce.ac.in"
+... })
+WriteResult({ "nInserted" : 1 })
+
+
+> db.Department.insert({
+... "_id" : "IS01",
+... "name" : "ISE",
+... "HOD" : "harish",
+... "number" : "6856846616",
+... "mail" : "ise@bmsce.ac.in"
+... })
+WriteResult({ "nInserted" : 1 })
+
+
+> db.Department.insertMany([{
+... "_id" : "EE01",
+... "name" : "EEE",
+... "HOD" : "nalini",
+... "number" : "7894561237",
+... "mail" : "eee@bmsce.ac.in"
+... },
+... {
+... "_id" : "CV01",
+... "name" : "CV",
+... "HOD" : "bharini",
+... "number" : "9874563217",
+... "mail" : "CV@bmsce.ac.in"
+... }])
+{ "acknowledged" : true, "insertedIds" : [ "EE01", "CV01" ] }
+
+> db.Department.find()
+{ "_id" : "EC01", "name" : "ECE", "HOD" : "Naveen", "number" : "946464646", "mail" : "ece@bmsce.ac.in" }
+{ "_id" : "CS01", "name" : "CSE", "HOD" : "Umadevi", "number" : "863497638", "mail" : "cse@bmsce.ac.in" }
+{ "_id" : "IS01", "name" : "ISE", "HOD" : "harish", "number" : "6856846616", "mail" : "ise@bmsce.ac.in" }
+{ "_id" : "EE01", "name" : "EEE", "HOD" : "nalini", "number" : "7894561237", "mail" : "eee@bmsce.ac.in" }
+{ "_id" : "CV01", "name" : "CV", "HOD" : "bharini", "number" : "9874563217", "mail" : "CV@bmsce.ac.in" }
+
+
+> db.Employee.insertOne({
+... "userId":"rirani",
+... "jobTitleName":"Developer",
+... "firstName":"Romin",
+... "lastName":"Irani",
+... "preferredFullName":"Romin Irani",
+... "employeeCode":"E1",
+... "region":"1002",
+... "phoneNumber":"408-1234567",
+... "emailAddress":"romin.k.irani@gmail.com"
+... })
+{
+	"acknowledged" : true,
+	"insertedId" : ObjectId("5f75ac1b7bc63d325a11a11c")
+}
+
+
+> db.Employee.insert({
+... "userId":"nirani",
+... "jobTitleName":"Developer",
+... "firstName":"Neil",
+... "lastName":"Irani",
+... "preferredFullName":"Neil Irani",
+... "employeeCode":"E2",
+... "region":"1002",
+... "phoneNumber":"408-1111111",
+... "emailAddress":"neilrirani@gmail.com"
+... })
+WriteResult({ "nInserted" : 1 })
+
+
+> db.Employee.insert({
+... "userId":"rani",
+... "jobTitleName":"Developer",
+... "firstName":"rani",
+... "lastName":"rani",
+... "preferredFullName":"rani rani",
+... "employeeCode":"E5",
+... "region":"1008",
+... "phoneNumber":"408-1991111",
+... "emailAddress":"ranirani@gmail.com"
+... })
+
+
+WriteResult({ "nInserted" : 1 })
+> db.Employee.insertMany([{
+... "userId":"thanks",
+... "jobTitleName":"Program Directory",
+... "firstName":"Tom",
+... "lastName":"Hanks",
+... "preferredFullName":"Tom Hanks",
+... "employeeCode":"E3",
+... "region":"1002",
+... "phoneNumber":"408-2222222",
+... "emailAddress":"tomhanks@gmail.com"
+... },
+... {
+... "userId":"tha",
+... "jobTitleName":"Director",
+... "firstName":"steve",
+... "lastName":"Hanks",
+... "preferredFullName":"steve Hanks",
+... "employeeCode":"E4",
+... "region":"1003",
+... "phoneNumber":"408-2552222",
+... "emailAddress":"stevehanks@gmail.com"
+... }])
+{
+	"acknowledged" : true,
+	"insertedIds" : [
+		ObjectId("5f75ac3c7bc63d325a11a11f"),
+		ObjectId("5f75ac3c7bc63d325a11a120")
+	]
+}
+
+
+> db.Employee.find()
+{ "_id" : ObjectId("5f75ac1b7bc63d325a11a11c"), "userId" : "rirani", "jobTitleName" : "Developer", "firstName" : "Romin", "lastName" : "Irani", "preferredFullName" : "Romin Irani", "employeeCode" : "E1", "region" : "1002", "phoneNumber" : "408-1234567", "emailAddress" : "romin.k.irani@gmail.com" }
+{ "_id" : ObjectId("5f75ac267bc63d325a11a11d"), "userId" : "nirani", "jobTitleName" : "Developer", "firstName" : "Neil", "lastName" : "Irani", "preferredFullName" : "Neil Irani", "employeeCode" : "E2", "region" : "1002", "phoneNumber" : "408-1111111", "emailAddress" : "neilrirani@gmail.com" }
+{ "_id" : ObjectId("5f75ac317bc63d325a11a11e"), "userId" : "rani", "jobTitleName" : "Developer", "firstName" : "rani", "lastName" : "rani", "preferredFullName" : "rani rani", "employeeCode" : "E5", "region" : "1008", "phoneNumber" : "408-1991111", "emailAddress" : "ranirani@gmail.com" }
+{ "_id" : ObjectId("5f75ac3c7bc63d325a11a11f"), "userId" : "thanks", "jobTitleName" : "Program Directory", "firstName" : "Tom", "lastName" : "Hanks", "preferredFullName" : "Tom Hanks", "employeeCode" : "E3", "region" : "1002", "phoneNumber" : "408-2222222", "emailAddress" : "tomhanks@gmail.com" }
+{ "_id" : ObjectId("5f75ac3c7bc63d325a11a120"), "userId" : "tha", "jobTitleName" : "Director", "firstName" : "steve", "lastName" : "Hanks", "preferredFullName" : "steve Hanks", "employeeCode" : "E4", "region" : "1003", "phoneNumber" : "408-2552222", "emailAddress" : "stevehanks@gmail.com" }
+
+
+> db.Employee.find().pretty()
+{
+	"_id" : ObjectId("5f75ac1b7bc63d325a11a11c"),
+	"userId" : "rirani",
+	"jobTitleName" : "Developer",
+	"firstName" : "Romin",
+	"lastName" : "Irani",
+	"preferredFullName" : "Romin Irani",
+	"employeeCode" : "E1",
+	"region" : "1002",
+	"phoneNumber" : "408-1234567",
+	"emailAddress" : "romin.k.irani@gmail.com"
+}
+{
+	"_id" : ObjectId("5f75ac267bc63d325a11a11d"),
+	"userId" : "nirani",
+	"jobTitleName" : "Developer",
+	"firstName" : "Neil",
+	"lastName" : "Irani",
+	"preferredFullName" : "Neil Irani",
+	"employeeCode" : "E2",
+	"region" : "1002",
+	"phoneNumber" : "408-1111111",
+	"emailAddress" : "neilrirani@gmail.com"
+}
+{
+	"_id" : ObjectId("5f75ac317bc63d325a11a11e"),
+	"userId" : "rani",
+	"jobTitleName" : "Developer",
+	"firstName" : "rani",
+	"lastName" : "rani",
+	"preferredFullName" : "rani rani",
+	"employeeCode" : "E5",
+	"region" : "1008",
+	"phoneNumber" : "408-1991111",
+	"emailAddress" : "ranirani@gmail.com"
+}
+{
+	"_id" : ObjectId("5f75ac3c7bc63d325a11a11f"),
+	"userId" : "thanks",
+	"jobTitleName" : "Program Directory",
+	"firstName" : "Tom",
+	"lastName" : "Hanks",
+	"preferredFullName" : "Tom Hanks",
+	"employeeCode" : "E3",
+	"region" : "1002",
+	"phoneNumber" : "408-2222222",
+	"emailAddress" : "tomhanks@gmail.com"
+}
+{
+	"_id" : ObjectId("5f75ac3c7bc63d325a11a120"),
+	"userId" : "tha",
+	"jobTitleName" : "Director",
+	"firstName" : "steve",
+	"lastName" : "Hanks",
+	"preferredFullName" : "steve Hanks",
+	"employeeCode" : "E4",
+	"region" : "1003",
+	"phoneNumber" : "408-2552222",
+	"emailAddress" : "stevehanks@gmail.com"
+}
+> db.Employee.update({'userId':'tha'},{$set:{'userId':'Robert'}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.Employee.update({'userId':'johny'},{$set:{
+... "userId":"Depp",
+... "jobTitleName":"Actor",
+... "firstName":"Johny",
+... "lastName":"Depp",
+... "preferredFullName":"Johny Depp",
+... "employeeCode":"E6",
+... "region":"1003",
+... "phoneNumber":"408-2552229",
+... "emailAddress":"Depp@gmail.com"
+... }},{"upsert" : "true"})
+WriteResult({
+	"nMatched" : 0,
+	"nUpserted" : 1,
+	"nModified" : 0,
+	"_id" : ObjectId("5f75ac621fc4e83c77e79077")
+})
+
+
+> db.Employee.update({'userId':'thanks'},{$set:{'salary':100000}},{"upsert" : false})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+
+
+> db.Employee.update({'userId':'Robert'},{$set:{'salary':200000}},{"upsert" : false})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+
+
+> db.Department.find().pretty()
+{
+	"_id" : "EC01",
+	"name" : "ECE",
+	"HOD" : "Naveen",
+	"number" : "946464646",
+	"mail" : "ece@bmsce.ac.in"
+}
+{
+	"_id" : "CS01",
+	"name" : "CSE",
+	"HOD" : "Umadevi",
+	"number" : "863497638",
+	"mail" : "cse@bmsce.ac.in"
+}
+{
+	"_id" : "IS01",
+	"name" : "ISE",
+	"HOD" : "harish",
+	"number" : "6856846616",
+	"mail" : "ise@bmsce.ac.in"
+}
+{
+	"_id" : "EE01",
+	"name" : "EEE",
+	"HOD" : "nalini",
+	"number" : "7894561237",
+	"mail" : "eee@bmsce.ac.in"
+}
+{
+	"_id" : "CV01",
+	"name" : "CV",
+	"HOD" : "bharini",
+	"number" : "9874563217",
+	"mail" : "CV@bmsce.ac.in"
+}
+
+
+> db.Department.update({ "_id": "CV01" },{ $unset: {"mail": ""}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+
+
+> db.Department.update({ "_id": "EC01" },{ $unset: {"number": ""}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+
+
+> db.Department.find().pretty()
+{
+	"_id" : "EC01",
+	"name" : "ECE",
+	"HOD" : "Naveen",
+	"mail" : "ece@bmsce.ac.in"
+}
+{
+	"_id" : "CS01",
+	"name" : "CSE",
+	"HOD" : "Umadevi",
+	"number" : "863497638",
+	"mail" : "cse@bmsce.ac.in"
+}
+{
+	"_id" : "IS01",
+	"name" : "ISE",
+	"HOD" : "harish",
+	"number" : "6856846616",
+	"mail" : "ise@bmsce.ac.in"
+}
+{
+	"_id" : "EE01",
+	"name" : "EEE",
+	"HOD" : "nalini",
+	"number" : "7894561237",
+	"mail" : "eee@bmsce.ac.in"
+}
+{
+	"_id" : "CV01",
+	"name" : "CV",
+	"HOD" : "bharini",
+	"number" : "9874563217"
+}
+> db.Employee.updateMany( {}, { $rename: { "region": "dept_code" } } )
+{ "acknowledged" : true, "matchedCount" : 6, "modifiedCount" : 6 }
+
+
+> db.Employee.updateMany({'dept_code':'1002'},{$set:{'dept_code':1002}},{"upsert" : false})
+{ "acknowledged" : true, "matchedCount" : 3, "modifiedCount" : 3 }
+
+
+> db.Employee.updateMany({'dept_code':'1008'},{$set:{'dept_code':1008}},{"upsert" : false})
+{ "acknowledged" : true, "matchedCount" : 1, "modifiedCount" : 1 }
+
+
+> db.Employee.updateMany({'dept_code':'1003'},{$set:{'dept_code':1003}},{"upsert" : false})
+{ "acknowledged" : true, "matchedCount" : 2, "modifiedCount" : 2 }
+
+
+> db.Department.updateMany({'_id':'1002'},{$set:{'dept_code':1002}},{"upsert" : false})
+{ "acknowledged" : true, "matchedCount" : 0, "modifiedCount" : 0 }
+
+
+> db.Department.updateMany({'_id':'CS01'},{$set:{'dept_code':1002}},{"upsert" : false})
+{ "acknowledged" : true, "matchedCount" : 1, "modifiedCount" : 1 }
+
+> db.Employee.updateMany({'dept_code':'1008'},{$set:{'dept_code':1008}},{"upsert" : false})
+{ "acknowledged" : true, "matchedCount" : 0, "modifiedCount" : 0 }
+> db.Department.updateMany({'_id':'EC01'},{$set:{'dept_code':1008}},{"upsert" : false})
+{ "acknowledged" : true, "matchedCount" : 1, "modifiedCount" : 1 }
+> db.Department.updateMany({'_id':'EE01'},{$set:{'dept_code':1004}},{"upsert" : false})
+{ "acknowledged" : true, "matchedCount" : 1, "modifiedCount" : 1 }
+> db.Department.updateMany({'_id':'CV01'},{$set:{'dept_code':1003}},{"upsert" : false})
+{ "acknowledged" : true, "matchedCount" : 1, "modifiedCount" : 1 }
+> db.Department.updateMany({'_id':'IS01'},{$set:{'dept_code':1010}},{"upsert" : false})
+{ "acknowledged" : true, "matchedCount" : 1, "modifiedCount" : 1 }
+
+> db.Department.find().pretty()
+{
+	"_id" : "EC01",
+	"name" : "ECE",
+	"HOD" : "Naveen",
+	"mail" : "ece@bmsce.ac.in",
+	"dept_code" : 1008
+}
+{
+	"_id" : "CS01",
+	"name" : "CSE",
+	"HOD" : "Umadevi",
+	"number" : "863497638",
+	"mail" : "cse@bmsce.ac.in",
+	"dept_code" : 1002
+}
+{
+	"_id" : "IS01",
+	"name" : "ISE",
+	"HOD" : "harish",
+	"number" : "6856846616",
+	"mail" : "ise@bmsce.ac.in",
+	"dept_code" : 1010
+}
+{
+	"_id" : "EE01",
+	"name" : "EEE",
+	"HOD" : "nalini",
+	"number" : "7894561237",
+	"mail" : "eee@bmsce.ac.in",
+	"dept_code" : 1004
+}
+{
+	"_id" : "CV01",
+	"name" : "CV",
+	"HOD" : "bharini",
+	"number" : "9874563217",
+	"dept_code" : 1003
+}
+> db.Employee.find().pretty()
+{
+	"_id" : ObjectId("5f75ac1b7bc63d325a11a11c"),
+	"userId" : "rirani",
+	"jobTitleName" : "Developer",
+	"firstName" : "Romin",
+	"lastName" : "Irani",
+	"preferredFullName" : "Romin Irani",
+	"employeeCode" : "E1",
+	"phoneNumber" : "408-1234567",
+	"emailAddress" : "romin.k.irani@gmail.com",
+	"dept_code" : 1002
+}
+{
+	"_id" : ObjectId("5f75ac267bc63d325a11a11d"),
+	"userId" : "nirani",
+	"jobTitleName" : "Developer",
+	"firstName" : "Neil",
+	"lastName" : "Irani",
+	"preferredFullName" : "Neil Irani",
+	"employeeCode" : "E2",
+	"phoneNumber" : "408-1111111",
+	"emailAddress" : "neilrirani@gmail.com",
+	"dept_code" : 1002
+}
+{
+	"_id" : ObjectId("5f75ac317bc63d325a11a11e"),
+	"userId" : "rani",
+	"jobTitleName" : "Developer",
+	"firstName" : "rani",
+	"lastName" : "rani",
+	"preferredFullName" : "rani rani",
+	"employeeCode" : "E5",
+	"phoneNumber" : "408-1991111",
+	"emailAddress" : "ranirani@gmail.com",
+	"dept_code" : 1008
+}
+{
+	"_id" : ObjectId("5f75ac3c7bc63d325a11a11f"),
+	"userId" : "thanks",
+	"jobTitleName" : "Program Directory",
+	"firstName" : "Tom",
+	"lastName" : "Hanks",
+	"preferredFullName" : "Tom Hanks",
+	"employeeCode" : "E3",
+	"phoneNumber" : "408-2222222",
+	"emailAddress" : "tomhanks@gmail.com",
+	"salary" : 100000,
+	"dept_code" : 1002
+}
+{
+	"_id" : ObjectId("5f75ac3c7bc63d325a11a120"),
+	"userId" : "Robert",
+	"jobTitleName" : "Director",
+	"firstName" : "steve",
+	"lastName" : "Hanks",
+	"preferredFullName" : "steve Hanks",
+	"employeeCode" : "E4",
+	"phoneNumber" : "408-2552222",
+	"emailAddress" : "stevehanks@gmail.com",
+	"salary" : 200000,
+	"dept_code" : 1003
+}
+{
+	"_id" : ObjectId("5f75ac621fc4e83c77e79077"),
+	"userId" : "Depp",
+	"emailAddress" : "Depp@gmail.com",
+	"employeeCode" : "E6",
+	"firstName" : "Johny",
+	"jobTitleName" : "Actor",
+	"lastName" : "Depp",
+	"phoneNumber" : "408-2552229",
+	"preferredFullName" : "Johny Depp",
+	"dept_code" : 1003
+}
+
+
+> db.Employee.find({$and : [{"dept_code" : {$gt : 1000}},{"dept_code" : {$lt : 1006}}]},{"preferredFullName" : 1,"dept_code" : 1,"_id" : 0})
+{ "preferredFullName" : "Romin Irani", "dept_code" : 1002 }
+{ "preferredFullName" : "Neil Irani", "dept_code" : 1002 }
+{ "preferredFullName" : "Tom Hanks", "dept_code" : 1002 }
+{ "preferredFullName" : "steve Hanks", "dept_code" : 1003 }
+{ "preferredFullName" : "Johny Depp", "dept_code" : 1003 }
+
+
+
+> db.Employee.find({preferredFullName: /^s/});
+{ "_id" : ObjectId("5f75ac3c7bc63d325a11a120"), "userId" : "Robert", "jobTitleName" : "Director", "firstName" : "steve", "lastName" : "Hanks", "preferredFullName" : "steve Hanks", "employeeCode" : "E4", "phoneNumber" : "408-2552222", "emailAddress" : "stevehanks@gmail.com", "salary" : 200000, "dept_code" : 1003 }
+
+
+> db.Employee.find({"Age" : {$lt : 30}}).pretty()
+{
+	"_id" : ObjectId("5f75ac1b7bc63d325a11a11c"),
+	"userId" : "rirani",
+	"jobTitleName" : "Developer",
+	"firstName" : "Romin",
+	"lastName" : "Irani",
+	"preferredFullName" : "Romin Irani",
+	"employeeCode" : "E1",
+	"phoneNumber" : "408-1234567",
+	"emailAddress" : "romin.k.irani@gmail.com",
+	"dept_code" : 1002,
+	"Age" : 20
+}
+{
+	"_id" : ObjectId("5f75ac317bc63d325a11a11e"),
+	"userId" : "rani",
+	"jobTitleName" : "Developer",
+	"firstName" : "rani",
+	"lastName" : "rani",
+	"preferredFullName" : "rani rani",
+	"employeeCode" : "E5",
+	"phoneNumber" : "408-1991111",
+	"emailAddress" : "ranirani@gmail.com",
+	"dept_code" : 1008,
+	"Age" : 21
+}
+{
+	"_id" : ObjectId("5f75ac3c7bc63d325a11a11f"),
+	"userId" : "thanks",
+	"jobTitleName" : "Program Directory",
+	"firstName" : "Tom",
+	"lastName" : "Hanks",
+	"preferredFullName" : "Tom Hanks",
+	"employeeCode" : "E3",
+	"phoneNumber" : "408-2222222",
+	"emailAddress" : "tomhanks@gmail.com",
+	"salary" : 100000,
+	"dept_code" : 1002,
+	"Age" : 25
+}
+{
+	"_id" : ObjectId("5f75ac3c7bc63d325a11a120"),
+	"userId" : "Robert",
+	"jobTitleName" : "Director",
+	"firstName" : "steve",
+	"lastName" : "Hanks",
+	"preferredFullName" : "steve Hanks",
+	"employeeCode" : "E4",
+	"phoneNumber" : "408-2552222",
+	"emailAddress" : "stevehanks@gmail.com",
+	"salary" : 200000,
+	"dept_code" : 1003,
+	"Age" : 25
+}
