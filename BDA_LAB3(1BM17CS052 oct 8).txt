@@ -1,0 +1,89 @@
+# student database problem
+
+use Student
+switched to db Student
+
+> db.createCollection('Student')
+{ "ok" : 1 }
+
+> db.Student.insert([{ RollNo:1, Age:20, Contact:"8088631797", Name:"Nikhil C", Email:"nikhilc.cs17@bmsce.ac.in"}, 
+{ RollNo:10, Age:21, Contact:"7896541232", Name:"Bharath", Email:"bharath.cs17@bmsce.ac.in"}, 
+{ RollNo:11, Age:20, Contact:"7896531797", Name:"hetav", Email:"hetav.cs17@bmsce.ac.in"}, 
+{ RollNo:22, Age:22, Contact:"9632587412", Name:"Anil", Email:"anil.cs17@bmsce.ac.in"}])
+BulkWriteResult({
+	"writeErrors" : [ ],
+	"writeConcernErrors" : [ ],
+	"nInserted" : 4,
+	"nUpserted" : 0,
+	"nMatched" : 0,
+	"nModified" : 0,
+	"nRemoved" : 0,
+	"upserted" : [ ]
+})
+
+db.Student.find().pretty()
+{
+	"_id" : ObjectId("5f7ed3bef8c2115a90ef93c8"),
+	"RollNo" : 1,
+	"Age" : 20,
+	"Contact" : "8088631797",
+	"Name" : "Nikhil C",
+	"Email" : "nikhilc.cs17@bmsce.ac.in"
+}
+{
+	"_id" : ObjectId("5f7ed3bef8c2115a90ef93c9"),
+	"RollNo" : 10,
+	"Age" : 21,
+	"Contact" : "7896541232",
+	"Name" : "Bharath",
+	"Email" : "bharath.cs17@bmsce.ac.in"
+}
+{
+	"_id" : ObjectId("5f7ed3bef8c2115a90ef93ca"),
+	"RollNo" : 11,
+	"Age" : 20,
+	"Contact" : "7896531797",
+	"Name" : "hetav",
+	"Email" : "hetav.cs17@bmsce.ac.in"
+}
+{
+	"_id" : ObjectId("5f7ed3bef8c2115a90ef93cb"),
+	"RollNo" : 22,
+	"Age" : 22,
+	"Contact" : "9632587412",
+	"Name" : "Anil",
+	"Email" : "anil.cs17@bmsce.ac.in"
+}
+
+
+> db.Student.update({RollNo:10},{$set:{Email:"bharathKumar.cs17@bmsce.ac.in"}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+
+> db.Student.update({RollNo:11},{$set:{Name:"Hetav Pabari"}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+
+
+$ mongoexport --db Student --collection Student --out Student.json
+2020-10-08T14:26:27.455+0530	connected to: localhost
+2020-10-08T14:26:27.455+0530	exported 4 records
+
+mongo
+
+> use Student
+switched to db Student
+> db.Student.drop()
+true
+> show collections
+> 
+
+
+$ mongoexport --db Student --collection Student -f id,RollNo,Age,Contact,Name,Email --type csv --out Student.csv
+2020-10-08T14:55:10.975+0530	connected to: localhost
+2020-10-08T14:55:10.975+0530	exported 4 records
+
+
+$ mongoimport --type=csv --db Student --collection imported_students --file student.csv --headerline
+2020-10-08T14:59:37.051+0530	connected to: localhost
+2020-10-08T14:59:37.248+0530	imported 57 documents
+
+
