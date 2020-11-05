@@ -1,0 +1,158 @@
+ CREATE KEYSPACE Employee with replication = {'class': 'SimpleStrategy', 'replication_factor': 1};
+
+use employee ;
+CREATE COLUMNFAMILY Employee_Info(
+            ... Emp_Id int PRIMARY KEY ,
+            ... Emp_name text,
+            ... Designation text,
+            ... DOJ text,
+            ... Salary float,
+            ... Dept_Name text);
+
+
+describe employee_info
+
+CREATE TABLE employee.employee_info (
+    emp_id int PRIMARY KEY,
+    dept_name text,
+    designation text,
+    doj text,
+    emp_name text,
+    salary float
+) WITH additional_write_policy = '99p'
+    AND bloom_filter_fp_chance = 0.01
+    AND caching = {'keys': 'ALL', 'rows_per_partition': 'NONE'}
+    AND cdc = false
+    AND comment = ''
+    AND compaction = {'class': 'org.apache.cassandra.db.compaction.SizeTieredCompactionStrategy', 'max_threshold': '32', 'min_threshold': '4'}
+    AND compression = {'chunk_length_in_kb': '16', 'class': 'org.apache.cassandra.io.compress.LZ4Compressor'}
+    AND crc_check_chance = 1.0
+    AND default_time_to_live = 0
+    AND extensions = {}
+    AND gc_grace_seconds = 864000
+    AND max_index_interval = 2048
+    AND memtable_flush_period_in_ms = 0
+    AND min_index_interval = 128
+    AND read_repair = 'BLOCKING'
+    AND speculative_retry = '99p';
+    
+
+    
+ BEGIN BATCH  INSERT INTO employee_info(emp_id,emp_name, designation , doj, salary , dept_name ) values (100,'albert','clerk','08-11-1998',75000,'marketing'); INSERT INTO employee_info(emp_id, emp_name , designation , doj, salary , dept_name ) values (121,'einstein','clerk','18-12-1998',7500,'sales'); INSERT INTO employee_info(emp_id, emp_name , designation , doj, salary , dept_name ) values (234,'maxwell','manager','08-11-1945',65000,'tech'); INSERT INTO employee_info(emp_id, emp_name , designation , doj, salary , dept_name ) values (170,'albert','manager','12-1-1988',10000,'sales'); APPLY BATCH ;
+cqlsh:employee> SELECT * from employee_info;
+
+ emp_id | dept_name | designation | doj        | emp_name | salary
+--------+-----------+-------------+------------+----------+--------
+    234 |      tech |     manager | 08-11-1945 |  maxwell |  65000
+    121 |     sales |       clerk | 18-12-1998 | einstein |   7500
+    100 | marketing |       clerk | 08-11-1998 |   albert |  75000
+    170 |     sales |     manager |  12-1-1988 |   albert |  10000
+
+(4 rows)
+cqlsh:employee> update employee_info set emp_name = 'nikhil c', dept_name = 'deployment' where emp_id = 121;
+cqlsh:employee> SELECT * from employee_info;
+
+ emp_id | dept_name  | designation | doj        | emp_name | salary
+--------+------------+-------------+------------+----------+--------
+    234 |       tech |     manager | 08-11-1945 |  maxwell |  65000
+    121 | deployment |       clerk | 18-12-1998 | nikhil c |   7500
+    100 |  marketing |       clerk | 08-11-1998 |   albert |  75000
+    170 |      sales |     manager |  12-1-1988 |   albert |  10000
+
+(4 rows)
+cqlsh:employee> alter table employee_info add projects set<text>;
+cqlsh:employee> SELECT * from employee_info;
+
+ emp_id | dept_name  | designation | doj        | emp_name | projects | salary
+--------+------------+-------------+------------+----------+----------+--------
+    234 |       tech |     manager | 08-11-1945 |  maxwell |     null |  65000
+    121 | deployment |       clerk | 18-12-1998 | nikhil c |     null |   7500
+    100 |  marketing |       clerk | 08-11-1998 |   albert |     null |  75000
+    170 |      sales |     manager |  12-1-1988 |   albert |     null |  10000
+
+(4 rows)
+cqlsh:employee> update employee_info set projects = {'ML','Algo'} WHERE emp_id = 234;
+cqlsh:employee> SELECT * from employee_info;
+
+ emp_id | dept_name  | designation | doj        | emp_name | projects       | salary
+--------+------------+-------------+------------+----------+----------------+--------
+    234 |       tech |     manager | 08-11-1945 |  maxwell | {'Algo', 'ML'} |  65000
+    121 | deployment |       clerk | 18-12-1998 | nikhil c |           null |   7500
+    100 |  marketing |       clerk | 08-11-1998 |   albert |           null |  75000
+    170 |      sales |     manager |  12-1-1988 |   albert |           null |  10000
+
+(4 rows)
+
+INSERT INTO employee_info(emp_id, emp_name , designation , doj, salary , dept_name ) values (371,'Bharath','manager','12-10-2015',18000,'tech') USING TTL 25; 
+
+cqlsh:employee> select ttl(emp_name) from employee_info where emp_id = 371;
+
+ ttl(emp_name)
+---------------
+            5
+            
+            
+            
+ ********************************* 2nd program ***********************************
+ cqlsh> CREATE KEYSPACE IF NOT EXISTS library WITH REPLICATION = { 'class' : 'SimpleStrategy', 'replication_factor' : 1 } and durable_writes = 'true';
+cqlsh> use library;
+
+cqlsh> CREATE COLUMNFAMILY library_info(
+   ...             counter_value counter,
+   ...             student_id int,
+   ...             stud_name varchar,
+   ...             book_name varchar,
+   ...             book_id int,
+   ...             date_of_issue varchar,
+   ...             PRIMARY KEY(student_id,stud_name,book_name,book_id,date_of_issue)
+   ... );
+            
+
+cqlsh:library> UPDATE library_info SET counter_value=counter_value+1 WHERE student_id=2 AND stud_name='bharath' AND book_name='Old One' AND book_id=123 AND date_of_issue='08-1-2014';
+cqlsh:library>  UPDATE library_info SET counter_value=counter_value+1 WHERE student_id=3 AND stud_name='varun' AND book_name='Love Tail' AND book_id=758 AND date_of_issue='14-2-2011';
+cqlsh:library> SELECT * from library_info ;
+
+ student_id | stud_name | book_name | book_id | date_of_issue | counter_value
+------------+-----------+-----------+---------+---------------+---------------
+          1 |    Nikhil |       GOT |    1000 |    10-10-2015 |             1
+          2 |   bharath |   Old One |     123 |     08-1-2014 |             1
+          3 |     varun | Love Tail |     758 |     14-2-2011 |             1
+
+(3 rows)
+
+UPDATE library_info SET counter_value=counter_value+1 WHERE student_id=2 AND stud_name='bharath' AND book_name='Old One' AND book_id=123 AND date_of_issue='08-1-2014';
+cqlsh:library> SELECT  * from library_info ;
+
+ student_id | stud_name | book_name | book_id | date_of_issue | counter_value
+------------+-----------+-----------+---------+---------------+---------------
+          1 |    Nikhil |       GOT |    1000 |    10-10-2015 |             1
+          2 |   bharath |   Old One |     123 |     08-1-2014 |             2
+          3 |     varun | Love Tail |     758 |     14-2-2011 |             1
+
+(3 rows)
+cqlsh:library> select book_name,counter_value from library_info where student_id=2;
+
+ book_name | counter_value
+-----------+---------------
+   Old One |             2
+
+(1 rows)
+
+cqlsh:library>  copy library_info(counter_value,student_id,stud_name,book_name,book_id,date_of_issue) to '/home/nikhil/Desktop_library_info';
+Using 7 child processes
+
+Starting copy of library.library_info with columns [counter_value, student_id, stud_name, book_name, book_id, date_of_issue].
+cqlshlib.copyutil.ExportProcess.write_rows_to_csv(): writing row
+cqlshlib.copyutil.ExportProcess.write_rows_to_csv(): writing row
+cqlshlib.copyutil.ExportProcess.write_rows_to_csv(): writing row/s
+Processed: 3 rows; Rate:      14 rows/s; Avg. rate:       9 rows/s
+3 rows exported to 1 files in 0.334 seconds.
+
+
+cqlsh:library>  copy library_imported from 'Desktop_library_info.csv';
+Using 7 child processes
+
+Starting copy of library.library_imported with columns [student_id, stud_name, book_name, book_id, date_of_issue, counter_value].
+Processed: 3 rows; Rate:       5 rows/s; Avg. rate:       7 rows/s
+3 rows imported from 1 files in 0.411 seconds (0 skipped).
+
